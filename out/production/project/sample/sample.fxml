@@ -52,7 +52,7 @@
                               <Font size="18.0" />
                           </font>
                       </Label>
-                      <TextField prefHeight="22.0" prefWidth="72.0" GridPane.columnIndex="1" />
+                      <TextField id="input_time" prefHeight="22.0" prefWidth="72.0" GridPane.columnIndex="1" />
                       <Label prefHeight="30.0" prefWidth="119.0" text="Burst Time" GridPane.rowIndex="1">
                           <font>
                               <Font size="18.0" />

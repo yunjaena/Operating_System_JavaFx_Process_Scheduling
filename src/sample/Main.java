@@ -13,6 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("OS Process Scheduling");
         primaryStage.setScene(new Scene(root, 700, 700));
+
         primaryStage.show();
     }
 
