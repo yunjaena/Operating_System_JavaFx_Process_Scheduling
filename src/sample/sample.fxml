@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -74,32 +76,35 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <RadioButton id="FCFS" mnemonicParsing="false" text="FCFS">
+                  <RadioButton id="FCFS" mnemonicParsing="false" selected="true" text="FCFS">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="radiobuttongroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton id="RR" mnemonicParsing="false" text="RR" toggleGroup="$radiobuttongroup" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton id="RR" mnemonicParsing="false" text="RR" GridPane.rowIndex="1">
+                  <RadioButton id="SPN" mnemonicParsing="false" text="SPN" toggleGroup="$radiobuttongroup" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton id="SPN" mnemonicParsing="false" text="SPN" GridPane.rowIndex="2">
+                  <RadioButton id="SRTN" mnemonicParsing="false" text="SRTN" toggleGroup="$radiobuttongroup" GridPane.rowIndex="3">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton id="SRTN" mnemonicParsing="false" text="SRTN" GridPane.rowIndex="3">
+                  <RadioButton id="HRRN" mnemonicParsing="false" text="HRRN" toggleGroup="$radiobuttongroup" GridPane.rowIndex="4">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton id="HRRN" mnemonicParsing="false" text="HRRN" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton id="FTW" mnemonicParsing="false" text="FTW" GridPane.rowIndex="5">
+                  <RadioButton id="FTW" mnemonicParsing="false" text="FTW" toggleGroup="$radiobuttongroup" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -110,9 +115,15 @@
                <children>
                   <TableView id="process_table" layoutX="11.0" layoutY="25.0" prefHeight="249.6" prefWidth="238.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="PID" />
-                      <TableColumn prefWidth="75.0" text="Arrival Time" />
-                      <TableColumn prefWidth="75.0" text="Burst Time" />
+                      <TableColumn id="pid" prefWidth="75.0" text="PID">
+                        <cellValueFactory><PropertyValueFactory property="PID" /></cellValueFactory>
+                       </TableColumn>
+                      <TableColumn id="arrival_time" prefWidth="75.0" text="Arrival Time">
+                        <cellValueFactory><PropertyValueFactory property="inputTime" /></cellValueFactory>
+                      </TableColumn>
+                      <TableColumn id="burst_time" prefWidth="75.0" text="Burst Time">
+                        <cellValueFactory><PropertyValueFactory property="burstTime" /></cellValueFactory>
+                      </TableColumn>
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
