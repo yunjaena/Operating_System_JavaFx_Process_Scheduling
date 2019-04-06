@@ -3,17 +3,26 @@ public class Process {
     private int arrivalTime;
     private int burstTime;
     private int runningTime;
-    private int waitingTime;
     private int turnaroundTime;
+    private int idleTime;
+    private int awakeTime;
 
     public Process(String _ID, int _arrivalTime, int _burstTime){
         setID(_ID);
         setArrivalTime(_arrivalTime);
         setBurstTime(_burstTime);
         setRunningTime(0);
-        setWaitingTime(0);
+        setIdleTime(0);
         setTurnaroundTime(0);
-    }
+    } //처음 삽입용
+
+    public Process(String _ID, int _arrivalTime, int _burstTime, int _idleTime, int _awakeTime){
+        setID(_ID);
+        setArrivalTime(_arrivalTime);
+        setBurstTime(_burstTime);
+        setIdleTime(_idleTime);
+        setAwakeTime(_awakeTime);
+    } //중간 결과 저장용
 
     public String getID() {
         return ID;
@@ -53,14 +62,26 @@ public class Process {
         this.turnaroundTime = _turnaroundTime;
     }
 
-    public int getWaitingTime() {
-        return waitingTime;
+    public int getIdleTime() {
+        return idleTime;
     }
-    public void setWaitingTime(int _waitingTime) {
-        this.waitingTime = _waitingTime;
+    public void setIdleTime(int idleTime) {
+        this.idleTime = idleTime;
     }
-    public void increaseWaitingTime(){
-        this.waitingTime++;
+
+    public int getAwakeTime() {
+        return awakeTime;
+    }
+    public void setAwakeTime(int awakeTime) {
+        this.awakeTime = awakeTime;
+    }
+
+    public int getWaitingTime(){
+        return this.getTurnaroundTime() - this.getBurstTime();
+    }
+
+    public float getNTT(){
+        return (float)getTurnaroundTime()/getBurstTime();
     }
 }
 
