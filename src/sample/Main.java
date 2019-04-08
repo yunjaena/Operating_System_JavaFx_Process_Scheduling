@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    public static Button processAdd;
-    public static Button processSchedule;
-    public static TextField processInputTime;
-    public static TextField processBurstTime;
+    private Button processAdd;
+    private Button processSchedule;
+    private TextField processInputTime;
+    private TextField processBurstTime;
 
-    ArrayList<Process> processArrayList = new ArrayList<>();
+    private ArrayList<Process> processArrayList = new ArrayList<>();
 
-    private static int pidSequence=0;
+    private int pidSequence=0;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
