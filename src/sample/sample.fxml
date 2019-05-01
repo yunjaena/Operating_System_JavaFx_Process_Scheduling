@@ -159,6 +159,7 @@
                 <CategoryAxis label="Process" side="LEFT" />
               </xAxis>
               <yAxis>
+                  <NumberAxis side="BOTTOM"/>
               </yAxis>
             </StackedBarChart>
           </children>
