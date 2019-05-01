@@ -18,7 +18,7 @@ public class Process {
         setTurnaroundTime(0);
     }
 
-    public String getPID() {
+    public String getID() {
         return PID;
     }
     public void setID(String _PID) {

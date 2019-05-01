@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import sample.Process;
 
 public abstract class Scheduler {
     ArrayList<Process> pArr; //프로세스 원본 배열(결과 표 출력용 데이터가 저장됨)
