@@ -1,11 +1,11 @@
 public class Process {
     private String ID;
-    private int arrivalTime;
-    private int burstTime;
-    private int runningTime;
-    private int turnaroundTime;
-    private int idleTime;
-    private int awakeTime;
+    private int arrivalTime; // 프로세스가 도착한 시간
+    private int burstTime; // 프로세스의 총 실행 시간
+    private int runningTime; // 현재까지 프로세스가 실행된 누적 시간
+    private int turnaroundTime; // 프로세스의 완전 종료 시간
+    private int idleTime; // 프로세스가 외부 요인에 의해 idle 상태가 된 시점
+    private int awakeTime; // 프로세스가 다시 깨어난 시점
 
     public Process(String _ID, int _arrivalTime, int _burstTime){
         setID(_ID);
@@ -14,15 +14,7 @@ public class Process {
         setRunningTime(0);
         setIdleTime(0);
         setTurnaroundTime(0);
-    } //처음 삽입용
-
-    public Process(String _ID, int _arrivalTime, int _burstTime, int _idleTime, int _awakeTime){
-        setID(_ID);
-        setArrivalTime(_arrivalTime);
-        setBurstTime(_burstTime);
-        setIdleTime(_idleTime);
-        setAwakeTime(_awakeTime);
-    } //중간 결과 저장용
+    }
 
     public String getID() {
         return ID;
@@ -79,7 +71,6 @@ public class Process {
     public int getWaitingTime(){
         return this.getTurnaroundTime() - this.getBurstTime();
     }
-
     public float getNTT(){
         return (float)getTurnaroundTime()/getBurstTime();
     }
