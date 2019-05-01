@@ -1,7 +1,7 @@
-public class RRScheduler extends Scheduler {
+public class MRRScheduler extends Scheduler {
     private int delta; // 최대 실행 시간
 
-    public RRScheduler(int _delta){
+    public MRRScheduler(int _delta){
         setDelta(_delta);
     }
 
@@ -12,18 +12,21 @@ public class RRScheduler extends Scheduler {
         this.delta = delta;
     }
 
+    public static double baseLog(double x, double base) {
+        return Math.log10(x) / Math.log10(base);
+    }
+    public int getMercy(){
+        return (int)Math.floor(baseLog(delta, 2));
+    }
+
     public void changeProcess(int currentTime){
-        if(Processor.getBurstTime() > Processor.getRunningTime()){
-            // 프로세스 처리가 다 안됬으면 다시 큐에 삽입
-            if(!queue.isEmpty()){
-                Processor.setIdleTime(currentTime);
-                if(Processor.getArrivalTime() != Processor.getIdleTime()) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
-                queue.add(Processor);
-            }
+        Processor.setIdleTime(currentTime);
+        if(Processor.getBurstTime() - Processor.getRunningTime() > 0 && Processor.getBurstTime() - Processor.getRunningTime() < getMercy() && !Processor.getID().equals("idle")){
         }
         else{
-            Processor.setIdleTime(currentTime);
             if(Processor.getArrivalTime() != Processor.getIdleTime()) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
+            // 프로세스 처리가 다 안됬으면 다시 큐에 삽입
+            if(Processor.getBurstTime() > Processor.getRunningTime()) queue.add(Processor);
             //대기 큐가 비어있지 않은 경우 프로세스 교체
             if(!queue.isEmpty()) {
                 Processor = queue.get(0);
