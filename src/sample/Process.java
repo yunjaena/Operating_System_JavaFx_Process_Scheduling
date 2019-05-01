@@ -2,10 +2,10 @@ package sample;
 
 public class Process {
     private String PID;
-    private int arrivalTime; // 프로세스가 도착한 시간
+    private int arrivalTime; // 프로세스가 도착한 시간. Arrival Time to start time of segment.
     private int burstTime; // 프로세스의 총 실행 시간
     private int runningTime; // 현재까지 프로세스가 실행된 누적 시간
-    private int turnaroundTime; // 프로세스의 완전 종료 시간
+    private int turnaroundTime; // 프로세스의 완전 종료 시간. Turnaround Time to end time of segment.
     private int idleTime; // 프로세스가 외부 요인에 의해 idle 상태가 된 시점
     private int awakeTime; // 프로세스가 다시 깨어난 시점
 

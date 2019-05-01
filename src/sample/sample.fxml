@@ -154,12 +154,12 @@
                </children>
             </AnchorPane>
             <TextField id="time_quantom" layoutX="415.0" layoutY="73.0" prefHeight="22.0" prefWidth="125.0" promptText="Time Quantom(RR)" />
-            <StackedBarChart layoutX="20.0" layoutY="400.0" prefHeight="150.0" prefWidth="652.0">
+            <StackedBarChart id="gantt_chart" layoutX="20.0" layoutY="400.0" prefHeight="150.0" prefWidth="652.0">
               <xAxis>
-                <CategoryAxis label="Process" side="LEFT" />
+                  <NumberAxis side="BOTTOM" />
               </xAxis>
               <yAxis>
-                  <NumberAxis side="BOTTOM"/>
+                  <CategoryAxis label="Process" side="LEFT" />
               </yAxis>
             </StackedBarChart>
           </children>
