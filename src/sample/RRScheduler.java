@@ -1,3 +1,6 @@
+package sample;
+import sample.Scheduler;
+
 public class RRScheduler extends Scheduler {
     private int delta; // 최대 실행 시간
 

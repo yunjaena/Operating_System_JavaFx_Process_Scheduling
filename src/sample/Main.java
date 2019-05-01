@@ -44,7 +44,7 @@ public class Main extends Application {
             System.out.printf("inputTime is %d, burstTime is %d\n", inputTime, burstTime);
 
             TableView processTable = (TableView)root.lookup("#process_table");
-            Process input = new Process(pidSequence, inputTime, burstTime);
+            Process input = new Process(Integer.toString(pidSequence), inputTime, burstTime);
             processTable.getItems().add(input);
             processArrayList.add(input);
             pidSequence++;
@@ -78,6 +78,8 @@ public class Main extends Application {
                 System.out.println("FTW");
             }
         });
+
+        
     }
 
 
