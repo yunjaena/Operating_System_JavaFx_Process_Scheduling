@@ -17,13 +17,13 @@ public class RRScheduler extends Scheduler {
             // 프로세스 처리가 다 안됬으면 다시 큐에 삽입
             if(!queue.isEmpty()){
                 Processor.setIdleTime(currentTime);
-                if(Processor.getArrivalTime() != Processor.getIdleTime()) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
+                if(!Processor.getID().equals("idle")) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
                 queue.add(Processor);
             }
         }
         else{
             Processor.setIdleTime(currentTime);
-            if(Processor.getArrivalTime() != Processor.getIdleTime()) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
+            if(!Processor.getID().equals("idle")) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
             //대기 큐가 비어있지 않은 경우 프로세스 교체
             if(!queue.isEmpty()) {
                 Processor = queue.get(0);

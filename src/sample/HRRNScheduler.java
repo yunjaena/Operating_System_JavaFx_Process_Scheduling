@@ -8,7 +8,7 @@ public class HRRNScheduler extends Scheduler{
     }
     public void changeProcess(int currentTime){
         Processor.setIdleTime(currentTime);
-        if(Processor.getArrivalTime() != Processor.getIdleTime()) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
+        if(!Processor.getID().equals("idle")) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
         //대기 큐가 비어있지 않은 경우 프로세스 교체
         if(!queue.isEmpty()) {
             int  mostRR= 0;

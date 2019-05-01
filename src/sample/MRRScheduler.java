@@ -24,7 +24,7 @@ public class MRRScheduler extends Scheduler {
         if(Processor.getBurstTime() - Processor.getRunningTime() > 0 && Processor.getBurstTime() - Processor.getRunningTime() < getMercy() && !Processor.getID().equals("idle")){
         }
         else{
-            if(Processor.getArrivalTime() != Processor.getIdleTime()) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
+            if(!Processor.getID().equals("idle")) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
             // 프로세스 처리가 다 안됬으면 다시 큐에 삽입
             if(Processor.getBurstTime() > Processor.getRunningTime()) queue.add(Processor);
             //대기 큐가 비어있지 않은 경우 프로세스 교체
