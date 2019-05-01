@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
@@ -19,7 +22,7 @@
 
 <ScrollPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <AnchorPane prefHeight="748.0" prefWidth="694.0">
+      <AnchorPane prefHeight="806.0" prefWidth="694.0">
           <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="215.0" layoutX="36.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
                 <Button id="scheduling_start" layoutX="14.0" layoutY="258.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="375.0" text="Scheduling">
@@ -38,7 +41,7 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Separator layoutX="-6.0" layoutY="510.0" prefHeight="2.0" prefWidth="700.0" />
+                <Separator layoutX="-6.0" layoutY="562.0" prefHeight="0.0" prefWidth="700.0" />
             <GridPane layoutX="58.0" layoutY="76.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -131,7 +134,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="13.0" layoutY="520.0" prefHeight="216.0" prefWidth="650.0">
+            <AnchorPane layoutX="22.0" layoutY="576.0" prefHeight="216.0" prefWidth="650.0">
                <children>
                   <ScrollPane layoutX="94.0" layoutY="8.0" prefHeight="216.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
@@ -151,12 +154,14 @@
                </children>
             </AnchorPane>
             <TextField id="time_quantom" layoutX="415.0" layoutY="73.0" prefHeight="22.0" prefWidth="125.0" promptText="Time Quantom(RR)" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="103.0" layoutX="14.0" layoutY="399.0" stroke="BLACK" strokeType="INSIDE" width="647.0" />
-            <Label layoutX="80.0" layoutY="422.0" text="Gantt Chart will be here.">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Label>
+            <StackedBarChart layoutX="20.0" layoutY="400.0" prefHeight="150.0" prefWidth="652.0">
+              <xAxis>
+                <CategoryAxis label="Process" side="LEFT" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </StackedBarChart>
           </children>
       </AnchorPane>
    </content>
