@@ -96,15 +96,33 @@ public class Main extends Application {
     private void activateChart(Scheduler s) {
         ArrayList<XYChart.Series<Number, String>> schedulings = new ArrayList<>();
         HashMap<String, String> colorHashMap = new HashMap<>();
+        int num = 0;
+        String color;
         s.pArr = processArrayList;
         s.run();
 
         for (Process process : s.result) {
             XYChart.Series<Number, String> scheduling = new XYChart.Series<>();
-            scheduling.getData().add(new XYChart.Data<>(process.getArrivalTime(), process.getPID(), new GanttChart.ExtraData(process.getBurstTime() - process.getArrivalTime(), "status-red")));
+            scheduling.setName(process.getPID());
+            if(colorHashMap.isEmpty()) {
+                num++;
+                color = "status-0";
+                colorHashMap.put(process.getPID(),color);
+            }
+            else if(colorHashMap.containsKey(process.getPID()))
+                color = colorHashMap.get(process.getPID());
+            else
+            {
+                color = "status-"+num%11;
+                colorHashMap.put(process.getPID(),color);
+                num++;
+
+            }
+            scheduling.getData().add(new XYChart.Data<>(process.getArrivalTime(), process.getPID(), new GanttChart.ExtraData(process.getBurstTime() - process.getArrivalTime(), color)));
             schedulings.add(scheduling);
         }
-        ganttChart.getStylesheets().add(getClass().getResource("ganttchartStyle.css").toExternalForm());
+
+        //ganttChart.getStylesheets().add(getClass().getResource("ganttchartStyle.css").toExternalForm());
         ganttChart.getData().addAll(schedulings);
 
 

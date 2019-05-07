@@ -1,9 +1,33 @@
-.status-red {
+.status-0 {
     -fx-background-color:rgba(128,0,0,0.7);
 }
-.status-green {
+.status-1 {
     -fx-background-color:rgba(0,128,0,0.7);
 }
-.status-blue {
+.status-2 {
     -fx-background-color:rgba(0,0,128,0.7);
+}
+.status-3 {
+    -fx-background-color: rgba(128, 99, 97, 0.7);
+}
+.status-4 {
+    -fx-background-color:rgba(0,22,28,2.7);
+}
+.status-5 {
+    -fx-background-color:rgba(0,0,128,0.72);
+}
+.status-6 {
+    -fx-background-color:rgba(0,122,18,2.7);
+}
+.status-7 {
+    -fx-background-color: rgb(65, 27, 10);
+}
+.status-8 {
+    -fx-background-color: rgba(14, 128, 86, 0.7);
+}
+.status-9 {
+    -fx-background-color: rgba(56, 117, 128, 0.7);
+}
+.status-10 {
+    -fx-background-color: rgba(32, 128, 36, 0.7);
 }
