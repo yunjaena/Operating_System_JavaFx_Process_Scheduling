@@ -18,14 +18,9 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
-
-import sample.FCFSScheduler;
 
 public class Main extends Application {
 
-    private FCFSScheduler fcfs;
     private Button processAdd;
     private Button processSchedule;
     private TextField processInputTime;
@@ -95,24 +90,32 @@ public class Main extends Application {
         FTW = (RadioButton) root.lookup("#FTW");
     }
 
-    private static void fcfs(Scheduler s) {
+    private ArrayList<XYChart.Series<Number, String>> fcfs(Scheduler s) {
+        ArrayList<XYChart.Series<Number, String>> schedulings = new ArrayList<>();
+        s.pArr = processArrayList;
+        s.run();
+        for(int i=0;i<s.result.size();i++){
+            XYChart.Series<Number, String> scheduling = new XYChart.Series<>();
+            // < ! REMINDER ! >
+            // BurstTime is ENDTIME of segment. ArrivalTime is STARTTIME of segment.
+            int takenTime = s.result.get(i).getBurstTime() - s.result.get(i).getArrivalTime();
+            // -------------------------------------------------------------------------------
+            scheduling.getData().add(new XYChart.Data<>(takenTime, ""));
+            schedulings.add(scheduling);
+        }
 
+        return schedulings;
     }
 
     public void onClickedScheduleButton() {
         System.out.println("Process Scheduling Button clicked.");
-
-        ArrayList<XYChart.Series<Number, String>> schedulings = new ArrayList<>();
+        ArrayList<XYChart.Series<Number, String>> schedulings = null;
+        Scheduler s = null;
 
         if (FCFS.isSelected()) {
             System.out.println("FCFS");
-              /*  fcfs(new FCFSScheduler());
-                Scheduler s = new FCFSScheduler();
-                Collections.copy(s.pArr, processArrayList);
-                s.run();
-                for(int i=0;i<s.result.size();i++){
-
-                }*/
+            s = new FCFSScheduler();
+            schedulings = fcfs(s);
         } else if (RR.isSelected()) {
             System.out.println("RR");
         } else if (SPN.isSelected()) {
@@ -125,20 +128,32 @@ public class Main extends Application {
             System.out.println("FTW");
         }
 
-
-        for (int i = 0; i < 3; i++) {
-            XYChart.Series<Number, String> scheduling = new XYChart.Series<>();
-            // XYChart.Data<Number, String> data = new XYChart.Data<>(10, "PROCESS 0");
-            scheduling.getData().add(new XYChart.Data<>(10, ""));
-            schedulings.add(scheduling);
-        }
-
-        //ganttChart.getData().addAll(scheduling1, scheduling2, scheduling3);
         ganttChart.getData().addAll(schedulings);
 
         for (Node n : ganttChart.lookupAll(".default-color0.chart-bar")) {
             n.setStyle("-fx-bar-fill: yellow;");
         }
+
+        // ----------------------- [ Scheduling Result Table ] --------------------
+        // don't forget to add factory at fxml.
+        TableView resultTable = (TableView) root.lookup("#output_table");
+        ArrayList<ResultProcess> result = new ArrayList<>(s.result.size());
+
+        for(int i=0;i<s.result.size();i++){
+            Process process = s.result.get(i);
+            Process origin = null;
+            for(int j=0;j<s.pArr.size();j++){
+                if(s.pArr.get(j).getPID().equals(process.getPID())){
+                    origin = s.pArr.get(j);
+                    break;
+                }
+            }
+            if(origin != null)
+                result.add(new ResultProcess(process.getPID(),origin.getTurnaroundTime() - origin.getBurstTime(),
+                        origin.getTurnaroundTime(),(float)origin.getTurnaroundTime()/origin.getBurstTime()));
+        }
+        resultTable.getItems().addAll(result);
+        // ------------------------------------------------------------------------
     }
 
     public void onClickedProccessAddButton() {
@@ -147,23 +162,22 @@ public class Main extends Application {
         try {
             inputTime = Integer.parseInt(processInputTime.getText());
             burstTime = Integer.parseInt(processBurstTime.getText());
-        } catch (Exception e) {
+        } catch (Exception e) { e.printStackTrace();
         }
         // try-catch for unexpected(String, etc...) input value.
         System.out.printf("inputTime is %d, burstTime is %d\n", inputTime, burstTime);
         // print at console for debugging.
 
+        // ------------------------ [ Process Table Management ] ---------------------------
         TableView processTable = (TableView) root.lookup("#process_table");
         Process input = new Process(Integer.toString(pidSequence), inputTime, burstTime);
         processTable.getItems().add(input);
         processArrayList.add(input);
         pidSequence++;
-        // get TableView and insert Process. Add to arraylist too.
-    }
+        // ----------------------------------------------------------------------------------
 
-    public void fcfsGanttChart()
-    {
-
+        processInputTime.setText("");
+        processBurstTime.setText("");
     }
 
     public static void main(String[] args) {

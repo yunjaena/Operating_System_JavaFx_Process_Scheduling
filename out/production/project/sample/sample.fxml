@@ -140,10 +140,18 @@
                      <content>
                         <TableView id="output_table" prefHeight="200.0" prefWidth="650.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="PID" />
-                            <TableColumn prefWidth="75.0" text="Waiting Time(WT)" />
-                              <TableColumn prefWidth="75.0" text="Turnaround Time(TT)" />
-                              <TableColumn prefWidth="75.0" text="Normalized TT" />
+                            <TableColumn prefWidth="75.0" text="PID">
+                              <cellValueFactory><PropertyValueFactory property="PID" /></cellValueFactory>
+                            </TableColumn>
+                            <TableColumn id="waiting_time" prefWidth="75.0" text="Waiting Time(WT)">
+                              <cellValueFactory><PropertyValueFactory property="waitingTime" /></cellValueFactory>
+                            </TableColumn>
+                            <TableColumn id="turnaround_time" prefWidth="75.0" text="Turnaround Time(TT)">
+                              <cellValueFactory><PropertyValueFactory property="turnaroundTime" /></cellValueFactory>
+                            </TableColumn>
+                            <TableColumn id="normalized_tt" prefWidth="75.0" text="Normalized TT">
+                              <cellValueFactory><PropertyValueFactory property="NTT" /></cellValueFactory>
+                            </TableColumn>
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
