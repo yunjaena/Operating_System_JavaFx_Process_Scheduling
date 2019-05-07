@@ -63,12 +63,15 @@ public abstract class Scheduler {
     }
     public abstract void run();
 
-    /*public static void main(String args[]){
-        Scheduler a = new FCFSScheduler();
-        a.insertProcess(new Process("1", 1, 3));
-        a.insertProcess(new Process("2", 2, 2));
+    public static void main(String args[]){
+        Scheduler a = new SPNScheduler();
+        a.insertProcess(new Process("1", 0, 3));
+        a.insertProcess(new Process("2", 2, 6));
+        a.insertProcess(new Process("3", 4, 4));
+        a.insertProcess(new Process("4", 16, 5));
+        a.insertProcess(new Process("5", 8, 2));
         a.run();
-    }*/
+    }
 }
 
 
