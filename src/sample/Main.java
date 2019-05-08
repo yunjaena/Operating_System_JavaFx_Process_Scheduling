@@ -26,6 +26,7 @@ public class Main extends Application {
 
     private Button processAdd;
     private Button processSchedule;
+    private Button processClear;
     private TextField processInputTime;
     private TextField processBurstTime;
     private TextField timeQuantom;
@@ -34,12 +35,11 @@ public class Main extends Application {
     private RadioButton SPN;
     private RadioButton SRTN;
     private RadioButton HRRN;
-    private RadioButton FTW;
+    private RadioButton MRR;
     final NumberAxis xAxis = new NumberAxis();
     final CategoryAxis yAxis = new CategoryAxis();
     @FXML
     private static GanttChart<Number, String> ganttChart;
-    private RadioButton MRR;
     private CategoryAxis processList;
     private NumberAxis processTime;
     private Parent root;
@@ -51,7 +51,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("OS Process Scheduling");
-        primaryStage.setScene(new Scene(root, 700, 700));
+        primaryStage.setScene(new Scene(root, 1500, 700));
         primaryStage.getScene().getStylesheets().add("sample/ganttchartStyle.css");
         primaryStage.show();
         initView();
@@ -81,6 +81,13 @@ public class Main extends Application {
         });
         // ---------------------------------------------------------------------------
 
+
+        // ------------------------- [ Process Clear Button ] ------------------------
+        processClear = (Button) root.lookup("#process_clear");
+        processClear.setOnAction(actionEvent -> {
+            onClickedProcessClearButton();
+        });
+        // ---------------------------------------------------------------------------
     }
 
     private void initView() {
@@ -101,6 +108,9 @@ public class Main extends Application {
         HashMap<String, String> colorHashMap = new HashMap<>();
         int num = 0;
         String color;
+        for(Process p : s.pArr){
+            System.out.println("HEY Im here!!! " + p.getID() + ", " + p.getArrivalTime() + "ASDASDASD");
+        }
         s.pArr.addAll(processArrayList);
         s.run();
 
@@ -158,6 +168,9 @@ public class Main extends Application {
         if (FCFS.isSelected()) {
             System.out.println("FCFS");
             s = new FCFSScheduler();
+        } else if (RR.isSelected()){
+            System.out.println("RR");
+            s = new RRScheduler(Integer.parseInt(timeQuantom.getText()));
         } else if (SPN.isSelected()) {
             System.out.println("SPN");
             s = new SPNScheduler();
@@ -205,6 +218,8 @@ public class Main extends Application {
         resultTable.getItems().addAll(result);
         // ------------------------------------------------------------------------
 
+
+        processArrayList.clear();
     }
 
 
@@ -233,6 +248,15 @@ public class Main extends Application {
         processBurstTime.setText("");
     }
 
+    public void onClickedProcessClearButton(){
+        ((TableView)root.lookup("#process_table")).getItems().clear();
+        ((TableView)root.lookup("#output_table")).getItems().clear();
+        ((TextField)root.lookup("#input_time")).setText("");
+        ((TextField)root.lookup("#burst_time")).setText("");
+        ((TextField)root.lookup("#time_quantom")).setText("");
+        processArrayList.clear();
+        pidSequence = 0;
+    }
 
     public static void main(String[] args) {
         launch(args);
