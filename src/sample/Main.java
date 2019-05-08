@@ -88,7 +88,7 @@ public class Main extends Application {
         SPN = (RadioButton) root.lookup("#SPN");
         SRTN = (RadioButton) root.lookup("#SRTN");
         HRRN = (RadioButton) root.lookup("#HRRN");
-        MRR = (RadioButton) root.lookup("#FTW");
+        MRR = (RadioButton) root.lookup("#MRR");
     }
 
     private ArrayList<XYChart.Series<Number, String>> runScheduling(Scheduler s) {
@@ -130,7 +130,7 @@ public class Main extends Application {
             System.out.println("HRRN");
             s = new HRRNScheduler();
         } else if (MRR.isSelected()) {
-            System.out.println("MRRN");
+            System.out.println("MRR");
             s = new MRRScheduler(Integer.parseInt(timeQuantom.getText()));
         }
 
@@ -147,6 +147,10 @@ public class Main extends Application {
         TableView resultTable = (TableView) root.lookup("#output_table");
         List<ResultProcess> result = new ArrayList<>(s.result.size()); // ArrayList to List to use Collections.sort()
         HashSet<Integer> pidSet = new HashSet<>();
+
+        // ------------------------- [ HOW TO CLEAR TABLE ] -----------------------
+        // ((TableView)root.lookup("#process_table")).getItems().clear();
+        // ------------------------------------------------------------------------
 
         for(int i=0;i<s.result.size();i++){
             Process process = s.result.get(i); // process of scheduling output. maybe divided into multiple parts.
@@ -194,6 +198,10 @@ public class Main extends Application {
         processInputTime.setText("");
         processBurstTime.setText("");
         // blank input field.
+    }
+
+    public void onClickedProcessCleanButton(){
+
     }
 
     public static void main(String[] args) {
