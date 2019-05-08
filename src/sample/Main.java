@@ -139,9 +139,9 @@ public class Main extends Application {
         if (FCFS.isSelected()) {
             System.out.println("FCFS");
             activateChart(new FCFSScheduler());
-
         } else if (RR.isSelected()) {
             System.out.println("RR");
+//            activateChart();
         } else if (SPN.isSelected()) {
             System.out.println("SPN");
         } else if (SRTN.isSelected()) {
