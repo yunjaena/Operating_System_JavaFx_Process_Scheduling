@@ -1,6 +1,6 @@
 package sample;
 
-public class ResultProcess {
+public class ResultProcess implements Comparable<ResultProcess> {
     private String PID;
     private int waitingTime;
     private int turnaroundTime;
@@ -44,4 +44,17 @@ public class ResultProcess {
     public void setNTT(float NTT) {
         this.NTT = NTT;
     }
+
+    @Override
+    public int compareTo(ResultProcess s) {
+        int thisPID = Integer.parseInt(this.PID);
+        int thatPID = Integer.parseInt(s.PID);
+        if (thisPID < thatPID) {
+            return -1;
+        } else if (thisPID > thatPID) {
+            return 1;
+        }
+        return 0;
+    }
+    // 출처: https://includestdio.tistory.com/35 [includestdio]
 }

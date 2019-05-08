@@ -1,5 +1,4 @@
 package sample;
-import sample.Scheduler;
 
 public class RRScheduler extends Scheduler {
     private int delta; // 최대 실행 시간
@@ -16,18 +15,30 @@ public class RRScheduler extends Scheduler {
     }
 
     public void changeProcess(int currentTime){
-        Processor.setIdleTime(currentTime);
-        if(Processor.getArrivalTime() != Processor.getIdleTime()) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
-        // 프로세스 처리가 다 안됬으면 다시 큐에 삽입
-        if(Processor.getBurstTime() > Processor.getRunningTime()) queue.add(Processor);
-        //대기 큐가 비어있지 않은 경우 프로세스 교체
-        if(!queue.isEmpty()) {
-            Processor = queue.get(0);
-            Processor.setAwakeTime(currentTime);
-            queue.remove(0);
+        if(Processor.getBurstTime() > Processor.getRunningTime()){
+            // 프로세스 처리가 다 안됬으면 다시 큐에 삽입
+            if(!queue.isEmpty()){
+                Processor.setIdleTime(currentTime);
+                if(!Processor.getID().equals("idle")) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
+                queue.add(Processor);
+                Processor = queue.get(0);
+                Processor.setAwakeTime(currentTime);
+                queue.remove(0);
+            }
         }
-        //비어있는 경우 프로세서를 idle 상태로 지정
-        else this.setIdle(currentTime);
+        else{
+            Processor.setIdleTime(currentTime);
+            if(!Processor.getID().equals("idle")) result.add(new Process(Processor.getID(), Processor.getAwakeTime(), Processor.getIdleTime()));
+            //대기 큐가 비어있지 않은 경우 프로세스 교체
+            if(!queue.isEmpty()) {
+                Processor = queue.get(0);
+                Processor.setAwakeTime(currentTime);
+                queue.remove(0);
+            }
+            //비어있는 경우 프로세서를 idle 상태로 지정
+            else this.setIdle(currentTime);
+        }
+
     }
 
     public void run(){
