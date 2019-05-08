@@ -107,7 +107,7 @@
                         <Font size="18.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton id="MRRN" mnemonicParsing="false" text="MRRN" toggleGroup="$radiobuttongroup" GridPane.rowIndex="5">
+                  <RadioButton id="MRR" mnemonicParsing="false" text="MRR" toggleGroup="$radiobuttongroup" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>

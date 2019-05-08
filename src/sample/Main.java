@@ -30,7 +30,7 @@ public class Main extends Application {
     private RadioButton SPN;
     private RadioButton SRTN;
     private RadioButton HRRN;
-    private RadioButton MRRN;
+    private RadioButton MRR;
     private StackedBarChart<Number, String> ganttChart;
     private CategoryAxis processList;
     private NumberAxis processTime;
@@ -88,7 +88,7 @@ public class Main extends Application {
         SPN = (RadioButton) root.lookup("#SPN");
         SRTN = (RadioButton) root.lookup("#SRTN");
         HRRN = (RadioButton) root.lookup("#HRRN");
-        MRRN = (RadioButton) root.lookup("#FTW");
+        MRR = (RadioButton) root.lookup("#FTW");
     }
 
     private ArrayList<XYChart.Series<Number, String>> runScheduling(Scheduler s) {
@@ -128,8 +128,10 @@ public class Main extends Application {
             s = new SRTNScheduler();
         } else if (HRRN.isSelected()) {
             System.out.println("HRRN");
-        } else if (MRRN.isSelected()) {
+            s = new HRRNScheduler();
+        } else if (MRR.isSelected()) {
             System.out.println("MRRN");
+            s = new MRRScheduler(Integer.parseInt(timeQuantom.getText()));
         }
 
         schedulings = runScheduling(s);

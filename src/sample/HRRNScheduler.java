@@ -1,3 +1,5 @@
+package sample;
+
 public class HRRNScheduler extends Scheduler{
     public double calcRR(int i, int currentTime){
         double responseRatio;

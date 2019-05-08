@@ -1,3 +1,5 @@
+package sample;
+
 public class Process {
     private String ID;
     private int arrivalTime; // 프로세스가 도착한 시간
@@ -15,6 +17,9 @@ public class Process {
         setIdleTime(0);
         setTurnaroundTime(0);
     }
+
+    public String getPID() { return ID;}
+    public int getInputTime(){return arrivalTime;}
 
     public String getID() {
         return ID;

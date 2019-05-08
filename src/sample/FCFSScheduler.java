@@ -1,3 +1,5 @@
+package sample;
+
 public class FCFSScheduler extends Scheduler {
     public void changeProcess(int currentTime){
         Processor.setIdleTime(currentTime);

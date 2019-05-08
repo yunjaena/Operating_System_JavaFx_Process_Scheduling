@@ -1,3 +1,5 @@
+package sample;
+
 public class MRRScheduler extends Scheduler {
     private int delta; // 최대 실행 시간
 
