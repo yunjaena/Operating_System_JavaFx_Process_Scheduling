@@ -108,7 +108,7 @@
                         <Font size="18.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton id="FTW" mnemonicParsing="false" text="FTW" toggleGroup="$radiobuttongroup" GridPane.rowIndex="5">
+                  <RadioButton id="MRR" mnemonicParsing="false" text="MRR" toggleGroup="$radiobuttongroup" GridPane.rowIndex="5">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -141,10 +141,18 @@
                      <content>
                         <TableView id="output_table" prefHeight="200.0" prefWidth="650.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="PID" />
-                            <TableColumn prefWidth="75.0" text="Waiting Time(WT)" />
-                              <TableColumn prefWidth="75.0" text="Turnaround Time(TT)" />
-                              <TableColumn prefWidth="75.0" text="Normalized TT" />
+                            <TableColumn prefWidth="75.0" text="PID">
+                              <cellValueFactory><PropertyValueFactory property="PID" /></cellValueFactory>
+                            </TableColumn>
+                            <TableColumn id="waiting_time" prefWidth="75.0" text="Waiting Time(WT)">
+                              <cellValueFactory><PropertyValueFactory property="waitingTime" /></cellValueFactory>
+                            </TableColumn>
+                            <TableColumn id="turnaround_time" prefWidth="75.0" text="Turnaround Time(TT)">
+                              <cellValueFactory><PropertyValueFactory property="turnaroundTime" /></cellValueFactory>
+                            </TableColumn>
+                            <TableColumn id="normalized_tt" prefWidth="75.0" text="Normalized TT">
+                              <cellValueFactory><PropertyValueFactory property="NTT" /></cellValueFactory>
+                            </TableColumn>
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -157,7 +165,7 @@
             <TextField id="time_quantom" layoutX="415.0" layoutY="73.0" prefHeight="22.0" prefWidth="125.0" promptText="Time Quantom(RR)" />
             <ScrollPane layoutX="14.0" layoutY="392.0" prefHeight="169.0" prefWidth="688.0">
                <content>
-                  <GanttChart id="gantt_chart" prefHeight="200" prefWidth="651.0" >
+                  <GanttChart id="gantt_chart"  prefWidth="651.0" >
                     <xAxis>
                       <NumberAxis  side="BOTTOM" />
                     </xAxis>

@@ -1,16 +1,16 @@
 package sample;
 
 public class Process {
-    private String PID;
-    private int arrivalTime; // 프로세스가 도착한 시간. Arrival Time to start time of segment.
+    private String ID;
+    private int arrivalTime; // 프로세스가 도착한 시간
     private int burstTime; // 프로세스의 총 실행 시간
     private int runningTime; // 현재까지 프로세스가 실행된 누적 시간
-    private int turnaroundTime; // 프로세스의 완전 종료 시간. Turnaround Time to end time of segment.
+    private int turnaroundTime; // 프로세스의 완전 종료 시간
     private int idleTime; // 프로세스가 외부 요인에 의해 idle 상태가 된 시점
     private int awakeTime; // 프로세스가 다시 깨어난 시점
 
-    public Process(String _PID, int _arrivalTime, int _burstTime){
-        setID(_PID);
+    public Process(String _ID, int _arrivalTime, int _burstTime){
+        setID(_ID);
         setArrivalTime(_arrivalTime);
         setBurstTime(_burstTime);
         setRunningTime(0);
@@ -18,17 +18,14 @@ public class Process {
         setTurnaroundTime(0);
     }
 
-    // DON'T REMOVE THIS. ///////////////////////////////////
-    // Application needs getter based on ID of scenebuilder.
-    public String getPID() {return PID;}
-    public int getInputTime() {return arrivalTime;}
-    /////////////////////////////////////////////////////////
+    public String getPID() { return ID;}
+    public int getInputTime(){return arrivalTime;}
 
     public String getID() {
-        return PID;
+        return ID;
     }
-    public void setID(String _PID) {
-        this.PID = _PID;
+    public void setID(String _ID) {
+        this.ID = _ID;
     }
 
     public int getArrivalTime() {
@@ -83,3 +80,4 @@ public class Process {
         return (float)getTurnaroundTime()/getBurstTime();
     }
 }
+
