@@ -168,7 +168,7 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
-            <TextField id="time_quantom" layoutX="415.0" layoutY="73.0" prefHeight="22.0" prefWidth="125.0" promptText="Time Quantom(RR)" />
+            <TextField id="time_quantum" layoutX="415.0" layoutY="73.0" prefHeight="22.0" prefWidth="125.0" promptText="Time Quantum(RR)" />
             <ScrollPane layoutX="709.0" layoutY="17.0" prefHeight="655.0" prefWidth="707.0">
                <content>
                   <GanttChart id="gantt_chart" prefWidth="690.0">
