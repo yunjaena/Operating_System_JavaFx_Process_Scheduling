@@ -1,8 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
-
 public class Main extends Application {
 
     private Button processAdd;
@@ -21,19 +18,15 @@ public class Main extends Application {
     private Button processClear;
     private TextField processInputTime;
     private TextField processBurstTime;
-    private TextField timeQuantom;
+    private TextField timeQuantum;
     private RadioButton FCFS;
     private RadioButton RR;
     private RadioButton SPN;
     private RadioButton SRTN;
     private RadioButton HRRN;
     private RadioButton MRR;
-    final NumberAxis xAxis = new NumberAxis();
-    final CategoryAxis yAxis = new CategoryAxis();
-    private static GanttChart<Number, String> ganttChart;
-    private CategoryAxis processList;
-    private NumberAxis processTime;
     private Parent root;
+    private static GanttChart<Number, String> ganttChart;
     private static ArrayList<Process> processArrayList = new ArrayList<>();
 
     private int pidSequence = 0;
@@ -47,26 +40,14 @@ public class Main extends Application {
         primaryStage.show();
         initView();
 
-
-        // ----------------------- [ Stacked Bar Chart components ] ----------------
-        processList = new CategoryAxis();
-        processTime = new NumberAxis();
-
-        processList.setLabel("category");
-        processTime.setLabel("Process scheduling.");
-
-        // -------------------------------------------------------------------------
-
         // ------------------------ [ Process Add Button ] -------------------------
-        processAdd = (Button) root.lookup("#process_add");
         processAdd.setOnAction(actionEvent -> {
-            onClickedProccessAddButton();
+            onClickedProcessAddButton();
         });
         // --------------------------------------------------------------------------
 
 
         // -------------------------[ Process Schedule Button ] ---------------------
-        processSchedule = (Button) root.lookup("#scheduling_start");
         processSchedule.setOnAction(actionEvent -> {
             onClickedScheduleButton();
         });
@@ -74,7 +55,6 @@ public class Main extends Application {
 
 
         // ------------------------- [ Process Clear Button ] ------------------------
-        processClear = (Button) root.lookup("#process_clear");
         processClear.setOnAction(actionEvent -> {
             onClickedProcessClearButton();
         });
@@ -82,42 +62,45 @@ public class Main extends Application {
     }
 
     private void initView() {
+        processAdd = (Button) root.lookup("#process_add");
+        processSchedule = (Button) root.lookup("#scheduling_start");
+        processClear = (Button) root.lookup("#process_clear");
         ganttChart = (GanttChart) root.lookup("#gantt_chart");
         processInputTime = (TextField) root.lookup("#input_time");
         processBurstTime = (TextField) root.lookup("#burst_time");
-        timeQuantom = (TextField) root.lookup("#time_quantom");
+        timeQuantum = (TextField) root.lookup("#time_quantum");
         FCFS = (RadioButton) root.lookup("#FCFS");
         RR = (RadioButton) root.lookup("#RR");
         SPN = (RadioButton) root.lookup("#SPN");
         SRTN = (RadioButton) root.lookup("#SRTN");
         HRRN = (RadioButton) root.lookup("#HRRN");
         MRR = (RadioButton) root.lookup("#MRR");
-        setVisiblityTimeQuantom(false);
+        setVisiblityTimeQuantum(false);
         initRadioButton();
     }
 
     public void initRadioButton() {
         FCFS.setOnMouseClicked(event -> {
-            setVisiblityTimeQuantom(false);
+            setVisiblityTimeQuantum(false);
         });
         RR.setOnMouseClicked(event -> {
-                    setVisiblityTimeQuantom(true);
+                    setVisiblityTimeQuantum(true);
                 }
         );
         SPN.setOnMouseClicked(event -> {
-                    setVisiblityTimeQuantom(false);
+                    setVisiblityTimeQuantum(false);
                 }
         );
         SRTN.setOnMouseClicked(event -> {
-                    setVisiblityTimeQuantom(false);
+                    setVisiblityTimeQuantum(false);
                 }
         );
         HRRN.setOnMouseClicked(event -> {
-                    setVisiblityTimeQuantom(false);
+                    setVisiblityTimeQuantum(false);
                 }
         );
         MRR.setOnMouseClicked(event -> {
-                    setVisiblityTimeQuantom(true);
+                    setVisiblityTimeQuantum(true);
                 }
         );
 
@@ -173,25 +156,24 @@ public class Main extends Application {
 
     }
 
-    public void setVisiblityTimeQuantom(boolean flag) {
+    public void setVisiblityTimeQuantum(boolean flag) {
         if (flag)
-            timeQuantom.setVisible(true);
+            timeQuantum.setVisible(true);
         else
-            timeQuantom.setVisible(false);
+            timeQuantum.setVisible(false);
     }
 
 
     public void onClickedScheduleButton() {
-        ArrayList<XYChart.Series<Number, String>> schedulings = null;
         Scheduler s = null;
         System.out.println("Process Scheduling Button clicked.");
         if (FCFS.isSelected()) {
             System.out.println("FCFS");
             s = new FCFSScheduler();
         } else if (RR.isSelected()) {
-            if (!timeQuantom.getText().trim().equals("")) {
+            if (!timeQuantum.getText().trim().equals("")) {
                 System.out.println("RR");
-                s = new RRScheduler(Integer.parseInt(timeQuantom.getText()));
+                s = new RRScheduler(Integer.parseInt(timeQuantum.getText()));
             } else {
                 makeAlertDialog("Time Quantum을 입력해주세요");
                 return;
@@ -206,9 +188,9 @@ public class Main extends Application {
             System.out.println("HRRN");
             s = new HRRNScheduler();
         } else if (MRR.isSelected()) {
-            if (!timeQuantom.getText().trim().equals("")) {
+            if (!timeQuantum.getText().trim().equals("")) {
                 System.out.println("MRRN");
-                s = new MRRScheduler(Integer.parseInt(timeQuantom.getText()));
+                s = new MRRScheduler(Integer.parseInt(timeQuantum.getText()));
             } else {
                 makeAlertDialog("Time Quantum을 입력해주세요");
                 return;
@@ -220,7 +202,6 @@ public class Main extends Application {
 
         // ----------------------- [ Scheduling Result Table ] --------------------
         // don't forget to add factory at fxml.
-        // TODO: Process Preemptive, Non-Preemptive scheduling differently. Need to count time.
         TableView resultTable = (TableView) root.lookup("#output_table");
         ((TableView) root.lookup("#output_table")).getItems().clear();
         List<ResultProcess> result = new ArrayList<>(s.result.size()); // ArrayList to List to use Collections.sort()
@@ -246,13 +227,8 @@ public class Main extends Application {
         }
 
         Collections.sort(result); // check compareTo method in ResultProcess.java
-        resultTable.getItems().
-
-                addAll(result);
+        resultTable.getItems().addAll(result);
         // ------------------------------------------------------------------------
-
-
-//        processArrayList.clear();
     }
 
 
@@ -265,7 +241,7 @@ public class Main extends Application {
         alert.showAndWait();
     }
 
-    public void onClickedProccessAddButton() {
+    public void onClickedProcessAddButton() {
         System.out.println("Process Add Button clicked.");
         int inputTime = 0, burstTime = 0;
         if (processInputTime.getText().equals("") ||
@@ -310,7 +286,7 @@ public class Main extends Application {
             ((TableView) root.lookup("#output_table")).getItems().clear();
             ((TextField) root.lookup("#input_time")).setText("");
             ((TextField) root.lookup("#burst_time")).setText("");
-            ((TextField) root.lookup("#time_quantom")).setText("");
+            ((TextField) root.lookup("#time_quantum")).setText("");
             processArrayList.clear();
             pidSequence = 0;
         }
